@@ -15,11 +15,16 @@ app.post('/shortest-path', (req, res) => {
 
   try {
     const result = dijkstra(graph, startNode, endNode);
-    res.json(result);
+    res.json({
+  paths: allPaths,   // array of arrays like [['A', 'B', 'D'], ['A', 'C', 'D']]
+  distance: shortestDistance
+});
+
   } catch (err) {
     res.status(500).json({ error: "Error processing graph" });
   }
 });
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

@@ -1,7 +1,8 @@
-import { Routes, Route, Link } from 'react-router-dom'
-import Home from './pages/Home'
-import Finder from './pages/Finder'
-import About from './pages/About'
+import { Routes, Route, Link } from 'react-router-dom';
+import Home from './pages/Home';
+import Finder from './pages/Finder';
+import About from './pages/About';
+ // ⬅️ Import the new page
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         <Route path="/about" element={<About />} />
       </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

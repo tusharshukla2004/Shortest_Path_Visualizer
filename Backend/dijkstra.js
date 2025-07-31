@@ -1,40 +1,36 @@
 function dijkstra(graph, start, end) {
   const distances = {};
-  const prev = {};
+  const paths = {};
   const visited = new Set();
   const nodes = new Set(Object.keys(graph));
 
   for (let node of nodes) {
     distances[node] = Infinity;
+    paths[node] = [];
   }
   distances[start] = 0;
+  paths[start] = [[start]];
 
   while (nodes.size) {
     let minNode = [...nodes].reduce((a, b) => distances[a] < distances[b] ? a : b);
     nodes.delete(minNode);
-
-    if (minNode === end) break;
     visited.add(minNode);
 
-    for (let neighbor in graph[minNode]) {
+    for (let [neighbor, weight] of graph[minNode]) {
       if (visited.has(neighbor)) continue;
-      let newDist = distances[minNode] + graph[minNode][neighbor];
+      const newDist = distances[minNode] + weight;
+
       if (newDist < distances[neighbor]) {
         distances[neighbor] = newDist;
-        prev[neighbor] = minNode;
+        paths[neighbor] = paths[minNode].map(p => [...p, neighbor]);
+      } else if (newDist === distances[neighbor]) {
+        paths[neighbor].push(...paths[minNode].map(p => [...p, neighbor]));
       }
     }
   }
 
-  const path = [];
-  let curr = end;
-  while (curr) {
-    path.unshift(curr);
-    curr = prev[curr];
-  }
-
   return {
-    path,
+    paths: paths[end],
     distance: distances[end] === Infinity ? -1 : distances[end],
   };
 }
