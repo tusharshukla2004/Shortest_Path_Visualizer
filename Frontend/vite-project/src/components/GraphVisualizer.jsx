@@ -10,7 +10,7 @@ function GraphVisualizer({ nodes, edges }) {
   }, [nodes, edges]);
 
   return (
-    <div style={{ height: 500, border: '1px solid #ccc', marginTop: '20px' }}>
+    <div style={{ height: 500, border: '1px solid #ccc', marginTop: '20px',backgroundColor: 'pink'}}>
       <ReactFlow
         nodes={elements.nodes}
         edges={elements.edges}

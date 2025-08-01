@@ -16,9 +16,9 @@ app.post('/shortest-path', (req, res) => {
   try {
     const result = dijkstra(graph, startNode, endNode);
     res.json({
-  paths: allPaths,   // array of arrays like [['A', 'B', 'D'], ['A', 'C', 'D']]
-  distance: shortestDistance
-});
+      paths: result.paths,
+      distance: result.distance
+    });
 
   } catch (err) {
     res.status(500).json({ error: "Error processing graph" });

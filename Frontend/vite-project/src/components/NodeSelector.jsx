@@ -1,3 +1,4 @@
+import './NodeSelector.css';
 function NodeSelector({ start, setStart, end, setEnd }) {
   return (
     <div className="inputs">
