@@ -56,3 +56,19 @@
   border-left: 5px solid green;
   border-radius: 8px;
 }
+
+button {
+  padding: 10px 20px;
+  background-color: #4caf50; /* Green */
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}

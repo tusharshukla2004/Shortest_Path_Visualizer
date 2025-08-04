@@ -1,0 +1,36 @@
+.graph-input-container {
+  padding: 20px;
+  background-color: #fdfcfb;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(100, 100, 255, 0.1);
+  margin: 20px auto;
+  max-width: 600px;
+  text-align: left;
+}
+
+.graph-input-container label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.graph-textarea {
+  width: 100%;
+  font-family: monospace;
+  font-size: 14px;
+  padding: 12px;
+  border: 2px solid #4caf50; /* Green border */
+  border-radius: 8px;
+  resize: vertical;
+  background-color: #f6fffa;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.1);
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.graph-textarea:focus {
+  outline: none;
+  border-color: #43a047;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.2);
+}

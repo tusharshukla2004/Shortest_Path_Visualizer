@@ -1,21 +1,29 @@
+import React from 'react';
 import './NodeSelector.css';
-function NodeSelector({ start, setStart, end, setEnd }) {
-  return (
-    <div className="inputs">
-      <input
-        type="text"
-        placeholder="Start Node"
-        value={start}
-        onChange={(e) => setStart(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="End Node"
-        value={end}
-        onChange={(e) => setEnd(e.target.value)}
-      />
-    </div>
-  )
-}
 
-export default NodeSelector
+const NodeSelector = ({ startNode, setStartNode, endNode, setEndNode }) => {
+  return (
+    <div className="node-selector-container">
+      <div className="node-field">
+        <label>Start Node:</label>
+        <input
+          type="text"
+          value={startNode}
+          onChange={(e) => setStartNode(e.target.value)}
+          placeholder="e.g., A"
+        />
+      </div>
+      <div className="node-field">
+        <label>End Node:</label>
+        <input
+          type="text"
+          value={endNode}
+          onChange={(e) => setEndNode(e.target.value)}
+          placeholder="e.g., D"
+        />
+      </div>
+    </div>
+  );
+};
+
+export default NodeSelector;

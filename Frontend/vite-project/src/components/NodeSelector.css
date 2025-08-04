@@ -1,22 +1,48 @@
-.inputs {
+.node-selector-container {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  margin: 20px 0;
-  flex-wrap: wrap;
-  background-color: #4caf50;
+  gap: 40px;
+  padding: 20px;
+  background: #f4faff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.1);
+  margin-top: 20px;
 }
 
-.inputs input {
-  padding: 10px 15px;
+.node-field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.node-field label {
+  font-weight: bold;
   font-size: 16px;
-  border: 2px solid #ccc;
-  border-radius: 6px;
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  margin-bottom: 6px;
 }
 
-.inputs input:focus {
-  border-color: #4caf50;
-  box-shadow: 0 0 6px rgba(76, 175, 80, 0.4);
+.node-field input {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  width: 200px;
+  border: 2px solid #ccc;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 🎨 Distinct colors for start and end nodes */
+.node-field:first-child input {
+  border-color: #007bff; /* blue */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+.node-field:last-child input {
+  border-color: #e91e63; /* pink */
+  box-shadow: 0 0 5px rgba(233, 30, 99, 0.2);
+}
+
+.node-field input:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  border-color: #000;
 }
