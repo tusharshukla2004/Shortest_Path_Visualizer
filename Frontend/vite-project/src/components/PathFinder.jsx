@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import './PathFinder.css';
+import GraphExamples from "./GraphExamples";
 import GraphInput from './GraphInput';
 import NodeSelector from './NodeSelector';
 import ResultBox from './ResultBox';
@@ -15,11 +16,33 @@ function PathFinder() {
   const [pathResult, setPathResult] = useState(null);
   const [nodes, setNodes] = useState([]);
   const [edges, setEdges] = useState([]);
+  
+
+  
+
 
   const parseGraph = (input) => {
     const parsed = JSON.parse(input);
     return parsed;
   };
+ const handleExampleSelect = (example) => {
+  const graph = example.graph;
+
+
+  // 1. Set GraphInput with example data
+  const graphString = JSON.stringify(graph, null, 2);
+  setGraphInput(graphString);
+
+  
+  // 3. Reset start/end nodes to let NodeSelector handle manually
+  setStartNode('');
+  setEndNode('');
+
+  // 4. Reset visualization and result
+  setNodes([]);
+  setEdges([]);
+  setPathResult(null);
+};
 
  const handleSubmit = async (e) => {
   e.preventDefault(); // Prevent default form reload
@@ -39,10 +62,11 @@ function PathFinder() {
 
   try {
     const res = await axios.post("http://localhost:5000/shortest-path", {
-      graph,
-      startNode,
-      endNode,
-    });
+  graph,
+  startNode,
+  endNode
+});
+
 
     const { paths, distance } = res.data;
     setPathResult({ paths, distance });
@@ -61,17 +85,29 @@ function PathFinder() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-  <GraphInput graphInput={graphInput} setGraphInput={setGraphInput} />
-  <NodeSelector startNode={startNode} setStartNode={setStartNode} endNode={endNode} setEndNode={setEndNode} />
-  <button type="submit">Find Shortest Path</button>
-      </form>
-
-      {pathResult && pathResult.paths && (
-  <ResultBox path={pathResult.paths} distance={pathResult.distance} />
-)}
-      {nodes.length > 0 && edges.length > 0 && <GraphVisualizer nodes={nodes} edges={edges} />}
+  <form onSubmit={handleSubmit}>
+    <div className="graph-top-container">
+      <GraphExamples onExampleSelect={handleExampleSelect} />
+      <GraphInput graphInput={graphInput} setGraphInput={setGraphInput} />
     </div>
+
+    <NodeSelector
+      startNode={startNode}
+      setStartNode={setStartNode}
+      endNode={endNode}
+      setEndNode={setEndNode}
+    />
+
+    <button type="submit">Find Shortest Path</button>
+  </form>
+
+  {pathResult && pathResult.paths && (
+    <ResultBox path={pathResult.paths} distance={pathResult.distance} />
+  )}
+
+  {nodes.length > 0 && edges.length > 0 && <GraphVisualizer nodes={nodes} edges={edges} />}
+</div>
+
   );
 }
 

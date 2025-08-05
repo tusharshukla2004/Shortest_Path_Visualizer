@@ -1,13 +1,16 @@
-// src/utils/layoutHelper.js
-import dagre from 'dagre';
+import dagre from "dagre";
 
-export const getLayoutedElements = (nodes, edges, direction = 'LR') => {
-  const dagreGraph = new dagre.graphlib.Graph();
-  dagreGraph.setDefaultEdgeLabel(() => ({}));
+const dagreGraph = new dagre.graphlib.Graph();
+dagreGraph.setDefaultEdgeLabel(() => ({}));
+
+const nodeWidth = 172;
+const nodeHeight = 36;
+
+export const getLayoutedElements = (nodes, edges, direction = "LR") => {
   dagreGraph.setGraph({ rankdir: direction });
 
   nodes.forEach((node) => {
-    dagreGraph.setNode(node.id, { width: 100, height: 40 });
+    dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight });
   });
 
   edges.forEach((edge) => {
@@ -16,20 +19,19 @@ export const getLayoutedElements = (nodes, edges, direction = 'LR') => {
 
   dagre.layout(dagreGraph);
 
-  const isHorizontal = direction === 'LR';
-
-  const layoutedNodes = nodes.map((node) => {
+  nodes.forEach((node) => {
     const nodeWithPosition = dagreGraph.node(node.id);
-    return {
-      ...node,
-      position: {
-        x: nodeWithPosition.x,
-        y: nodeWithPosition.y,
-      },
-      sourcePosition: isHorizontal ? 'right' : 'bottom',
-      targetPosition: isHorizontal ? 'left' : 'top',
+    node.targetPosition = direction === "LR" ? "left" : "top";
+    node.sourcePosition = direction === "LR" ? "right" : "bottom";
+
+    // Positioning with some offset to avoid overlap
+     node.position = {
+      x: nodeWithPosition.x - nodeWidth / 2,
+      y: nodeWithPosition.y - nodeHeight / 2,
     };
+
+    return node;
   });
 
-  return { nodes: layoutedNodes, edges };
+  return {nodes,edges};
 };
