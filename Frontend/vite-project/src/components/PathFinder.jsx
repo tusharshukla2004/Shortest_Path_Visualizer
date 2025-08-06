@@ -61,7 +61,7 @@ function PathFinder() {
   }
 
   try {
-    const res = await axios.post("https://shortest-path-visualizer-ejj8.onrender.com", {
+    const res = await axios.post("https://shortest-path-visualizer-ejj8.onrender.com/shortest-path", {
   graph,
   startNode,
   endNode
