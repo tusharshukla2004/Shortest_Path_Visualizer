@@ -3,7 +3,11 @@ const cors = require('cors');
 const dijkstra = require('./dijkstra');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: 'https://shortest-path-find.netlify.app', // Your frontend Netlify URL
+  credentials: true, // Optional: only if you're using cookies/auth
+}));
+
 app.use(express.json());
 
 app.post('/shortest-path', (req, res) => {
